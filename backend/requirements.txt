@@ -1,0 +1,17 @@
+# FastAPI 0.109.2 is the last version before fastapi-cli was added as a dep.
+# spaCy 3.8.4 relaxes typer to <0.13.0 so it co-exists with the rest of the stack.
+fastapi==0.109.2
+uvicorn[standard]==0.30.1
+neo4j==5.20.0
+httpx==0.27.0
+spacy==3.8.4
+phonenumbers==8.13.36
+dnspython==2.6.1
+fake-useragent==1.5.1
+pydantic-settings==2.3.0
+python-dotenv==1.0.1
+pydantic==2.7.4
+anyio==4.4.0
+starlette==0.36.3
+python-multipart==0.0.9
+holehe

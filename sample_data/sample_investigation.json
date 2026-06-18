@@ -1,0 +1,144 @@
+{
+  "investigation_id": "sample-001",
+  "query": "johndoe",
+  "query_type": "username",
+  "status": "complete",
+  "created_at": "2024-01-15T10:30:00Z",
+  "results": [
+    {
+      "entity_type": "username",
+      "value": "johndoe",
+      "platform": "GitHub",
+      "url": "https://github.com/johndoe",
+      "confidence": 0.95,
+      "metadata": {
+        "followers": null,
+        "public_repos": null
+      }
+    },
+    {
+      "entity_type": "username",
+      "value": "johndoe",
+      "platform": "Twitter",
+      "url": "https://twitter.com/johndoe",
+      "confidence": 0.90,
+      "metadata": {}
+    },
+    {
+      "entity_type": "username",
+      "value": "johndoe",
+      "platform": "Reddit",
+      "url": "https://reddit.com/user/johndoe",
+      "confidence": 0.92,
+      "metadata": {}
+    },
+    {
+      "entity_type": "username",
+      "value": "johndoe",
+      "platform": "Instagram",
+      "url": "https://instagram.com/johndoe",
+      "confidence": 0.88,
+      "metadata": {}
+    },
+    {
+      "entity_type": "username",
+      "value": "johndoe",
+      "platform": "LinkedIn",
+      "url": "https://linkedin.com/in/johndoe",
+      "confidence": 0.75,
+      "metadata": {}
+    },
+    {
+      "entity_type": "website",
+      "value": "github.com",
+      "platform": "GitHub",
+      "url": "https://github.com",
+      "confidence": 1.0,
+      "metadata": {}
+    },
+    {
+      "entity_type": "website",
+      "value": "twitter.com",
+      "platform": "Twitter",
+      "url": "https://twitter.com",
+      "confidence": 1.0,
+      "metadata": {}
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "inv-sample-001",
+        "label": "johndoe",
+        "node_type": "Investigation",
+        "properties": {
+          "query": "johndoe",
+          "query_type": "username",
+          "status": "complete"
+        }
+      },
+      {
+        "id": "u-github",
+        "label": "johndoe",
+        "node_type": "Username",
+        "properties": {
+          "platform": "GitHub",
+          "url": "https://github.com/johndoe",
+          "confidence": 0.95
+        }
+      },
+      {
+        "id": "u-twitter",
+        "label": "johndoe",
+        "node_type": "Username",
+        "properties": {
+          "platform": "Twitter",
+          "url": "https://twitter.com/johndoe",
+          "confidence": 0.90
+        }
+      },
+      {
+        "id": "u-reddit",
+        "label": "johndoe",
+        "node_type": "Username",
+        "properties": {
+          "platform": "Reddit",
+          "url": "https://reddit.com/user/johndoe",
+          "confidence": 0.92
+        }
+      },
+      {
+        "id": "w-github",
+        "label": "github.com",
+        "node_type": "Website",
+        "properties": {
+          "url": "https://github.com"
+        }
+      },
+      {
+        "id": "w-twitter",
+        "label": "twitter.com",
+        "node_type": "Website",
+        "properties": {
+          "url": "https://twitter.com"
+        }
+      },
+      {
+        "id": "w-reddit",
+        "label": "reddit.com",
+        "node_type": "Website",
+        "properties": {
+          "url": "https://reddit.com"
+        }
+      }
+    ],
+    "edges": [
+      {"id": "e1", "source": "inv-sample-001", "target": "u-github", "label": "CONTAINS"},
+      {"id": "e2", "source": "inv-sample-001", "target": "u-twitter", "label": "CONTAINS"},
+      {"id": "e3", "source": "inv-sample-001", "target": "u-reddit", "label": "CONTAINS"},
+      {"id": "e4", "source": "u-github", "target": "w-github", "label": "FOUND_ON"},
+      {"id": "e5", "source": "u-twitter", "target": "w-twitter", "label": "FOUND_ON"},
+      {"id": "e6", "source": "u-reddit", "target": "w-reddit", "label": "FOUND_ON"}
+    ]
+  }
+}
