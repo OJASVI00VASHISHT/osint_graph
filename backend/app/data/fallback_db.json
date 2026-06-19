@@ -1,5 +1,315 @@
 {
-  "investigations": {},
-  "entities": {},
-  "relationships": []
+  "investigations": {
+    "92359d04-fbf8-4057-b3de-2f2172044685": {
+      "node_id": "92359d04-fbf8-4057-b3de-2f2172044685",
+      "id": "92359d04-fbf8-4057-b3de-2f2172044685",
+      "query": "hehe_ojasvi",
+      "query_type": "username",
+      "status": "complete",
+      "created_at": "2026-06-19T09:38:03.541664+00:00",
+      "updated_at": "2026-06-19T09:38:05.654532+00:00",
+      "error_message": null
+    },
+    "4a11088c-1221-49cc-9942-a8f691c12564": {
+      "node_id": "4a11088c-1221-49cc-9942-a8f691c12564",
+      "id": "4a11088c-1221-49cc-9942-a8f691c12564",
+      "query": "hehe_ojasvi",
+      "query_type": "username",
+      "status": "complete",
+      "created_at": "2026-06-19T09:38:12.463342+00:00",
+      "updated_at": "2026-06-19T09:38:13.001200+00:00",
+      "error_message": null
+    },
+    "c32facef-a059-4ccf-a3aa-8e03d44488a7": {
+      "node_id": "c32facef-a059-4ccf-a3aa-8e03d44488a7",
+      "id": "c32facef-a059-4ccf-a3aa-8e03d44488a7",
+      "query": "hehe_ojasvi",
+      "query_type": "username",
+      "status": "complete",
+      "created_at": "2026-06-19T09:38:23.212517+00:00",
+      "updated_at": "2026-06-19T09:38:24.384372+00:00",
+      "error_message": null
+    },
+    "ff3837e5-2f25-459d-8a7b-865bf214da65": {
+      "node_id": "ff3837e5-2f25-459d-8a7b-865bf214da65",
+      "id": "ff3837e5-2f25-459d-8a7b-865bf214da65",
+      "query": "hehe_ojasvi",
+      "query_type": "username",
+      "status": "complete",
+      "created_at": "2026-06-19T09:43:23.092212+00:00",
+      "updated_at": "2026-06-19T09:43:27.514226+00:00",
+      "error_message": null
+    },
+    "da082c87-13b1-4394-9bed-071aa5f38f4a": {
+      "node_id": "da082c87-13b1-4394-9bed-071aa5f38f4a",
+      "id": "da082c87-13b1-4394-9bed-071aa5f38f4a",
+      "query": "7986431837",
+      "query_type": "phone",
+      "status": "complete",
+      "created_at": "2026-06-19T16:53:01.280824+00:00",
+      "updated_at": "2026-06-19T16:53:04.116288+00:00",
+      "error_message": null
+    },
+    "a682da2f-a596-4f68-bd40-d8525a3fe328": {
+      "node_id": "a682da2f-a596-4f68-bd40-d8525a3fe328",
+      "id": "a682da2f-a596-4f68-bd40-d8525a3fe328",
+      "query": "the.ojasvi.vashisht@gmail.com",
+      "query_type": "email",
+      "status": "complete",
+      "created_at": "2026-06-19T16:54:26.646628+00:00",
+      "updated_at": "2026-06-19T16:54:44.317742+00:00",
+      "error_message": null
+    },
+    "9435397a-8a38-429e-bfaf-fa9e999399ba": {
+      "node_id": "9435397a-8a38-429e-bfaf-fa9e999399ba",
+      "id": "9435397a-8a38-429e-bfaf-fa9e999399ba",
+      "query": "the.ojasvi.vashisht@gmail.com",
+      "query_type": "email",
+      "status": "complete",
+      "created_at": "2026-06-19T17:18:26.805144+00:00",
+      "updated_at": "2026-06-19T17:18:45.334217+00:00",
+      "error_message": null
+    }
+  },
+  "entities": {
+    "3c5787b1-2dab-4e80-ae81-f752c3ba2ffc": {
+      "node_id": "3c5787b1-2dab-4e80-ae81-f752c3ba2ffc",
+      "label": "Username",
+      "value": "hehe_ojasvi",
+      "platform": "Instagram",
+      "url": "https://www.instagram.com/hehe_ojasvi/",
+      "confidence": 0.95,
+      "source": "username_checker",
+      "metadata": {
+        "site_name": "Instagram",
+        "category": "social",
+        "source": "username_checker"
+      },
+      "created_at": "2026-06-19T09:43:25.989004+00:00",
+      "updated_at": "2026-06-19T09:43:25.989004+00:00"
+    },
+    "2b790d8e-9eb5-4e6d-8355-628bf8cc8c41": {
+      "node_id": "2b790d8e-9eb5-4e6d-8355-628bf8cc8c41",
+      "label": "Website",
+      "value": "https://www.instagram.com/hehe_ojasvi/",
+      "platform": "Instagram",
+      "url": "https://www.instagram.com/hehe_ojasvi/",
+      "confidence": 0.95,
+      "source": "username_checker",
+      "metadata": {
+        "site_name": "Instagram",
+        "category": "social",
+        "source": "username_checker"
+      },
+      "created_at": "2026-06-19T09:43:25.991306+00:00",
+      "updated_at": "2026-06-19T09:43:25.991306+00:00"
+    },
+    "9c640f1f-4d27-49c3-a4ba-732d0af3c7ee": {
+      "node_id": "9c640f1f-4d27-49c3-a4ba-732d0af3c7ee",
+      "label": "PhoneNumber",
+      "value": "+917986431837",
+      "platform": "phone",
+      "url": null,
+      "confidence": 0.9,
+      "source": "phone_collector",
+      "metadata": {
+        "valid": true,
+        "country_code": 91,
+        "national_number": "7986431837",
+        "country": "Ahmedabad Local, Gujarat",
+        "carrier": "Reliance Jio",
+        "line_type": "fixed_or_mobile",
+        "reputation": "unknown",
+        "numlookup": {}
+      },
+      "created_at": "2026-06-19T16:53:04.061749+00:00",
+      "updated_at": "2026-06-19T16:53:04.061749+00:00"
+    },
+    "4fa50c17-fdeb-40be-b2c1-0d27546ce92b": {
+      "node_id": "4fa50c17-fdeb-40be-b2c1-0d27546ce92b",
+      "label": "Organization",
+      "value": "Ahmedabad Local",
+      "platform": null,
+      "url": null,
+      "confidence": 0.75,
+      "source": "entity_extractor",
+      "metadata": {
+        "method": "ner"
+      },
+      "created_at": "2026-06-19T16:53:04.112032+00:00",
+      "updated_at": "2026-06-19T16:53:04.112032+00:00"
+    },
+    "c3253b70-58bd-4dc9-a91d-2eb38fba3fe1": {
+      "node_id": "c3253b70-58bd-4dc9-a91d-2eb38fba3fe1",
+      "label": "PhoneNumber",
+      "value": "7986431837",
+      "platform": null,
+      "url": null,
+      "confidence": 0.6,
+      "source": "entity_extractor",
+      "metadata": {
+        "method": "regex"
+      },
+      "created_at": "2026-06-19T16:53:04.114054+00:00",
+      "updated_at": "2026-06-19T16:53:04.114054+00:00"
+    },
+    "773ab340-c9f2-4fd8-8754-cd1ab0177cfe": {
+      "node_id": "773ab340-c9f2-4fd8-8754-cd1ab0177cfe",
+      "label": "Email",
+      "value": "the.ojasvi.vashisht@gmail.com",
+      "platform": "email",
+      "url": null,
+      "confidence": 0.65,
+      "source": "email_collector",
+      "metadata": {
+        "domain": "gmail.com",
+        "provider": "Google",
+        "has_mx": true,
+        "breached": false,
+        "breach_count": 0,
+        "breach_names": [],
+        "reputation": "unknown",
+        "suspicious": false,
+        "references": 0,
+        "registered sites": "spotify",
+        "registered site count": 1
+      },
+      "created_at": "2026-06-19T16:54:44.298823+00:00",
+      "updated_at": "2026-06-19T17:18:44.161092+00:00"
+    },
+    "8cb0e824-25bb-4c9d-9c0a-1a18f8681709": {
+      "node_id": "8cb0e824-25bb-4c9d-9c0a-1a18f8681709",
+      "label": "Website",
+      "value": "spotify",
+      "platform": "spotify",
+      "url": "https://spotify.com",
+      "confidence": 0.85,
+      "source": "holehe_collector",
+      "metadata": {
+        "registered": true,
+        "domain": "spotify.com",
+        "detection method": "register",
+        "email recovery": "",
+        "phone recovery": "",
+        "other info": "",
+        "source": "holehe"
+      },
+      "created_at": "2026-06-19T16:54:44.303727+00:00",
+      "updated_at": "2026-06-19T17:18:44.163235+00:00"
+    },
+    "47bc5bcc-f5cc-4a13-9ce0-ed646c294700": {
+      "node_id": "47bc5bcc-f5cc-4a13-9ce0-ed646c294700",
+      "label": "Website",
+      "value": "twitter",
+      "platform": "twitter",
+      "url": "https://twitter.com",
+      "confidence": 0.85,
+      "source": "holehe_collector",
+      "metadata": {
+        "registered": true,
+        "domain": "twitter.com",
+        "detection method": "register",
+        "email recovery": "",
+        "phone recovery": "",
+        "other info": "",
+        "source": "holehe"
+      },
+      "created_at": "2026-06-19T17:18:44.164893+00:00",
+      "updated_at": "2026-06-19T17:18:44.164893+00:00"
+    },
+    "f55e6be8-143e-4d7d-8ca0-03bd6bc5f06c": {
+      "node_id": "f55e6be8-143e-4d7d-8ca0-03bd6bc5f06c",
+      "label": "Website",
+      "value": "office365",
+      "platform": "office365",
+      "url": "https://office365.com",
+      "confidence": 0.85,
+      "source": "holehe_collector",
+      "metadata": {
+        "registered": true,
+        "domain": "office365.com",
+        "detection method": "other",
+        "email recovery": "",
+        "phone recovery": "",
+        "other info": "",
+        "source": "holehe"
+      },
+      "created_at": "2026-06-19T17:18:44.165951+00:00",
+      "updated_at": "2026-06-19T17:18:44.165951+00:00"
+    }
+  },
+  "relationships": [
+    {
+      "from": "ff3837e5-2f25-459d-8a7b-865bf214da65",
+      "to": "3c5787b1-2dab-4e80-ae81-f752c3ba2ffc",
+      "type": "CONTAINS",
+      "props": {}
+    },
+    {
+      "from": "ff3837e5-2f25-459d-8a7b-865bf214da65",
+      "to": "2b790d8e-9eb5-4e6d-8355-628bf8cc8c41",
+      "type": "CONTAINS",
+      "props": {}
+    },
+    {
+      "from": "3c5787b1-2dab-4e80-ae81-f752c3ba2ffc",
+      "to": "2b790d8e-9eb5-4e6d-8355-628bf8cc8c41",
+      "type": "FOUND_ON",
+      "props": {}
+    },
+    {
+      "from": "da082c87-13b1-4394-9bed-071aa5f38f4a",
+      "to": "9c640f1f-4d27-49c3-a4ba-732d0af3c7ee",
+      "type": "CONTAINS",
+      "props": {}
+    },
+    {
+      "from": "da082c87-13b1-4394-9bed-071aa5f38f4a",
+      "to": "4fa50c17-fdeb-40be-b2c1-0d27546ce92b",
+      "type": "CONTAINS",
+      "props": {}
+    },
+    {
+      "from": "da082c87-13b1-4394-9bed-071aa5f38f4a",
+      "to": "c3253b70-58bd-4dc9-a91d-2eb38fba3fe1",
+      "type": "CONTAINS",
+      "props": {}
+    },
+    {
+      "from": "a682da2f-a596-4f68-bd40-d8525a3fe328",
+      "to": "773ab340-c9f2-4fd8-8754-cd1ab0177cfe",
+      "type": "CONTAINS",
+      "props": {}
+    },
+    {
+      "from": "a682da2f-a596-4f68-bd40-d8525a3fe328",
+      "to": "8cb0e824-25bb-4c9d-9c0a-1a18f8681709",
+      "type": "CONTAINS",
+      "props": {}
+    },
+    {
+      "from": "9435397a-8a38-429e-bfaf-fa9e999399ba",
+      "to": "773ab340-c9f2-4fd8-8754-cd1ab0177cfe",
+      "type": "CONTAINS",
+      "props": {}
+    },
+    {
+      "from": "9435397a-8a38-429e-bfaf-fa9e999399ba",
+      "to": "8cb0e824-25bb-4c9d-9c0a-1a18f8681709",
+      "type": "CONTAINS",
+      "props": {}
+    },
+    {
+      "from": "9435397a-8a38-429e-bfaf-fa9e999399ba",
+      "to": "47bc5bcc-f5cc-4a13-9ce0-ed646c294700",
+      "type": "CONTAINS",
+      "props": {}
+    },
+    {
+      "from": "9435397a-8a38-429e-bfaf-fa9e999399ba",
+      "to": "f55e6be8-143e-4d7d-8ca0-03bd6bc5f06c",
+      "type": "CONTAINS",
+      "props": {}
+    }
+  ]
 }
