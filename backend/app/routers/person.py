@@ -66,7 +66,7 @@ def validate_cdr_text(text: str) -> bool:
         if any(h in lower_line for h in ["caller", "called", "calling", "recipient", "phone", "duration", "timestamp", "type"]):
             continue
         total_data_lines += 1
-        parts = [p.strip() for p in re.split(r"[\t,;]+", line)]
+        parts = [re.sub(r"^['\"]+|['\"]+$", "", p.strip()) for p in re.split(r"[\t,;]+", line)]
         if len(parts) < 2:
             continue
             
@@ -76,9 +76,9 @@ def validate_cdr_text(text: str) -> bool:
             if re.match(r"^\d{7,15}$", clean_p) and not re.match(r"^\d{4}-\d{2}-\d{2}", p):
                 phones.append(p)
                 
-        if len(phones) >= 2:
+        if len(phones) >= 1:
             valid_lines_count += 1
-    return total_data_lines > 0 and (valid_lines_count / total_data_lines) >= 0.5
+    return valid_lines_count > 0
 
 def validate_ipdr_text(text: str) -> bool:
     if not text:
@@ -96,7 +96,7 @@ def validate_ipdr_text(text: str) -> bool:
         if any(h in lower_line for h in ["subscriber ip", "destination ip", "bytes", "protocol"]):
             continue
         total_data_lines += 1
-        parts = [p.strip() for p in re.split(r"[\t,;]+", line)]
+        parts = [re.sub(r"^['\"]+|['\"]+$", "", p.strip()) for p in re.split(r"[\t,;]+", line)]
         if len(parts) < 2:
             continue
             
@@ -107,7 +107,7 @@ def validate_ipdr_text(text: str) -> bool:
                 
         if len(ips) >= 2:
             valid_lines_count += 1
-    return total_data_lines > 0 and (valid_lines_count / total_data_lines) >= 0.5
+    return valid_lines_count > 0
 
 @router.post("/person/{node_id}/cdr")
 async def upload_cdr(node_id: str, payload: CDRUploadRequest):
@@ -261,7 +261,7 @@ def parse_ipdr_records(ipdr_text: str) -> List[Dict[str, Any]]:
     for line in lines:
         if not line.strip():
             continue
-        parts = [p.strip() for p in re.split(r"[\t,;]+", line.strip())]
+        parts = [re.sub(r"^['\"]+|['\"]+$", "", p.strip()) for p in re.split(r"[\t,;]+", line.strip())]
         if len(parts) >= 2:
             if any(h in p.lower() for p in parts for h in ["subscriber", "destination"]):
                 continue
@@ -296,7 +296,7 @@ def parse_cdr_records(cdr_text: str, suspect_phone: Optional[str] = None) -> Lis
     for line in lines:
         if not line.strip():
             continue
-        parts = [p.strip() for p in re.split(r"[\t,;]+", line.strip())]
+        parts = [re.sub(r"^['\"]+|['\"]+$", "", p.strip()) for p in re.split(r"[\t,;]+", line.strip())]
         if len(parts) >= 2:
             if any(h in p.lower() for p in parts for h in ["caller", "calling", "called"]):
                 continue
@@ -310,9 +310,9 @@ def parse_cdr_records(cdr_text: str, suspect_phone: Optional[str] = None) -> Lis
                 else:
                     other_parts.append(p)
                     
-            if len(phones) >= 2:
+            if len(phones) >= 1:
                 caller = phones[0]
-                called = phones[1]
+                called = phones[1] if len(phones) > 1 else "Unknown"
                 timestamp = other_parts[0] if len(other_parts) > 0 else "Unknown"
                 duration = other_parts[1] if len(other_parts) > 1 else "0"
                 call_type = other_parts[2] if len(other_parts) > 2 else "Voice"

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { updatePerson, uploadCDR, uploadIPDR, getPersonAnalysis, createPerson, createRelationship, deleteNode, getPeople } from '../api/client';
 
 const NODE_COLORS = {
@@ -577,7 +577,7 @@ ${ipdrText || 'No IPDR data available.'}
       }
       
       totalDataLines++;
-      const parts = line.split(/[\t,;]+/).map(p => p.trim());
+      const parts = line.split(/[\t,;]+/).map(p => p.trim().replace(/^['"]+|['"]+$/g, ''));
       if (parts.length < 2) continue;
 
       let phones = [];
@@ -591,12 +591,12 @@ ${ipdrText || 'No IPDR data available.'}
         }
       }
       
-      if (phones.length >= 2) {
+      if (phones.length >= 1) {
         validLinesCount++;
       }
     }
 
-    return totalDataLines > 0 && (validLinesCount / totalDataLines) >= 0.5;
+    return validLinesCount > 0;
   };
 
   const validateIPDRText = (text) => {
@@ -618,7 +618,7 @@ ${ipdrText || 'No IPDR data available.'}
       }
 
       totalDataLines++;
-      const parts = line.split(/[\t,;]+/).map(p => p.trim());
+      const parts = line.split(/[\t,;]+/).map(p => p.trim().replace(/^['"]+|['"]+$/g, ''));
       if (parts.length < 2) continue;
 
       let ips = [];
@@ -633,7 +633,7 @@ ${ipdrText || 'No IPDR data available.'}
       }
     }
 
-    return totalDataLines > 0 && (validLinesCount / totalDataLines) >= 0.5;
+    return validLinesCount > 0;
   };
 
   // CDR Upload Parser
@@ -982,6 +982,7 @@ ${ipdrText || 'No IPDR data available.'}
     const sim = json.sim_analysis || {};
     const location = json.location_analysis || {};
     const time = json.time_analysis || {};
+    const recent = json.recent_48h_analysis || {};
     const confidence = json.confidence_score !== undefined ? json.confidence_score : 1.0;
     const explanation = json.confidence_explanation || '';
 
@@ -1017,6 +1018,26 @@ ${ipdrText || 'No IPDR data available.'}
             <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-warning)', marginTop: 2 }}>{formatDuration(metrics.total_duration_sec)}</span>
           </div>
         </div>
+
+        {/* Recent 48 Hour Analysis Block */}
+        {recent.observed && (
+          <div className="analysis-report-box" style={{ borderColor: 'rgba(255, 0, 0, 0.35)', background: 'rgba(255, 0, 0, 0.02)' }}>
+            <div className="report-header" style={{ color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', fontSize: 10 }}>⚡ Recent 48-Hour Intelligence Summary</div>
+            <div style={{ padding: 10, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ fontSize: 11, color: 'var(--text-primary)', lineHeight: '1.4' }}>{recent.summary}</div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: 8, borderTop: '1px solid var(--border-subtle)', paddingTop: 8, fontSize: 10 }}>
+                <div>
+                  <span style={{ color: 'var(--text-muted)' }}>Location</span>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginTop: 2 }}>{recent.last_known_location || 'N/A'}</div>
+                </div>
+                <div>
+                  <span style={{ color: 'var(--text-muted)' }}>IMEI</span>
+                  <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--text-primary)', marginTop: 2 }}>{recent.last_known_device || 'N/A'}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="analysis-report-box" style={{ background: 'rgba(15, 15, 15, 0.4)' }}>
           <div className="report-header" style={{ color: 'var(--accent-cyan)', padding: '6px 12px', fontSize: 10 }}>👥 Top Interacted Contacts</div>
@@ -1284,6 +1305,14 @@ ${ipdrText || 'No IPDR data available.'}
       </div>
     );
   };
+
+  const parsedCdrAnalysis = useMemo(() => {
+    return parseCdrAnalysis(activeNode?.metadata?.cdr_analysis);
+  }, [activeNode?.metadata?.cdr_analysis]);
+
+  const parsedIpdrAnalysis = useMemo(() => {
+    return parseIpdrAnalysis(activeNode?.metadata?.ipdr_analysis);
+  }, [activeNode?.metadata?.ipdr_analysis]);
 
   return (
     <div className="corkboard-wrapper">
@@ -1744,7 +1773,7 @@ ${ipdrText || 'No IPDR data available.'}
 
               {/* TABS 2: CDR File paste/upload */}
               {dialogTab === 'cdr' && (() => {
-                const { markdown, json } = parseCdrAnalysis(activeNode.metadata?.cdr_analysis);
+                const { markdown, json } = parsedCdrAnalysis;
                 return (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                     {/* If analysis exists, show it! */}
@@ -1831,7 +1860,7 @@ ${ipdrText || 'No IPDR data available.'}
 
               {/* TABS 3: IPDR File paste/upload */}
               {dialogTab === 'ipdr' && (() => {
-                const { markdown, json } = parseIpdrAnalysis(activeNode.metadata?.ipdr_analysis);
+                const { markdown, json } = parsedIpdrAnalysis;
                 return (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                     {/* If analysis exists, show it! */}

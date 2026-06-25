@@ -93,37 +93,7 @@ export default function AnalysisPage() {
     }
   };
 
-  // Convert raw text logs into objects for tabular rendering
-  const parseLogsToRows = (rawText, type) => {
-    if (!rawText) return [];
-    const lines = rawText.trim().split('\n');
-    return lines
-      .map((line, i) => {
-        const parts = line.split(/[\t,;]+/).map((p) => p.trim());
-        if (parts.length < 2 || parts[0].toLowerCase().includes('caller') || parts[0].toLowerCase().includes('called')) {
-          return null;
-        }
-        if (type === 'cdr') {
-          return {
-            id: i,
-            caller: parts[0],
-            called: parts[1],
-            timestamp: parts[2] || 'Unknown',
-            duration: parts[3] || '0',
-            type: parts[4] || 'Voice',
-          };
-        } else {
-          return {
-            id: i,
-            sub_ip: parts[0],
-            dest_ip: parts[1],
-            timestamp: parts[2] || 'Unknown',
-            bytes: parts[3] || '0',
-          };
-        }
-      })
-      .filter(Boolean);
-  };
+
 
   const renderCdrDashboard = (json) => {
     if (!json) return null;
@@ -134,6 +104,7 @@ export default function AnalysisPage() {
     const sim = json.sim_analysis || {};
     const location = json.location_analysis || {};
     const time = json.time_analysis || {};
+    const recent = json.recent_48h_analysis || {};
     const confidence = json.confidence_score !== undefined ? json.confidence_score : 1.0;
     const explanation = json.confidence_explanation || '';
 
@@ -236,6 +207,30 @@ export default function AnalysisPage() {
             </div>
           </div>
         </div>
+
+        {/* Recent 48 Hour Analysis Block */}
+        {recent.observed && (
+          <div className="analysis-report-box" style={{ borderColor: 'rgba(255, 0, 0, 0.35)', background: 'rgba(255, 0, 0, 0.02)' }}>
+            <div className="report-header" style={{ color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', gap: 8 }}>⚡ Recent 48-Hour Priority Intelligence Summary</div>
+            <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ fontSize: 13, color: 'var(--text-primary)', lineHeight: '1.5' }}>{recent.summary}</div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12, borderTop: '1px solid var(--border-subtle)', paddingTop: 12, fontSize: 11 }}>
+                <div>
+                  <span style={{ color: 'var(--text-muted)' }}>Last Known IP</span>
+                  <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent-cyan)', marginTop: 2 }}>{recent.last_known_ip || 'N/A'}</div>
+                </div>
+                <div>
+                  <span style={{ color: 'var(--text-muted)' }}>Last Tower Location</span>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginTop: 2 }}>{recent.last_known_location || 'N/A'}</div>
+                </div>
+                <div>
+                  <span style={{ color: 'var(--text-muted)' }}>Last Device IMEI</span>
+                  <div style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--text-primary)', marginTop: 2 }}>{recent.last_known_device || 'N/A'}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
           <div className="analysis-report-box" style={{ background: 'rgba(15, 15, 15, 0.4)' }}>
@@ -548,8 +543,6 @@ export default function AnalysisPage() {
     );
   };
 
-  const cdrRows = parseLogsToRows(analysisData?.cdr_data, 'cdr');
-  const ipdrRows = parseLogsToRows(analysisData?.ipdr_data, 'ipdr');
   const matches = analysisData?.matches || [];
 
   return (
@@ -725,36 +718,6 @@ export default function AnalysisPage() {
                         </div>
                       )}
 
-                      {/* Raw Logs Table */}
-                      {cdrRows.length > 0 && (
-                        <div>
-                          <div className="detail-section-label" style={{ marginBottom: 8 }}>Parsed Call Records ({cdrRows.length})</div>
-                          <div style={{ overflowX: 'auto' }}>
-                            <table className="analysis-table">
-                              <thead>
-                                <tr>
-                                  <th>Caller</th>
-                                  <th>Called Number</th>
-                                  <th>Timestamp</th>
-                                  <th>Duration</th>
-                                  <th>Type</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {cdrRows.map((row) => (
-                                  <tr key={row.id}>
-                                    <td style={{ fontFamily: 'monospace' }}>{row.caller}</td>
-                                    <td style={{ fontFamily: 'monospace' }}>{row.called}</td>
-                                    <td>{row.timestamp}</td>
-                                    <td>{row.duration}s</td>
-                                    <td>{row.type}</td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      )}
                     </div>
                   )}
 
@@ -820,34 +783,6 @@ export default function AnalysisPage() {
                         </div>
                       )}
 
-                      {/* Raw Logs Table */}
-                      {ipdrRows.length > 0 && (
-                        <div>
-                          <div className="detail-section-label" style={{ marginBottom: 8 }}>Parsed Network Activity ({ipdrRows.length})</div>
-                          <div style={{ overflowX: 'auto' }}>
-                            <table className="analysis-table">
-                              <thead>
-                                <tr>
-                                  <th>Subscriber IP</th>
-                                  <th>Destination IP</th>
-                                  <th>Timestamp</th>
-                                  <th>Data Transferred</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {ipdrRows.map((row) => (
-                                  <tr key={row.id}>
-                                    <td style={{ fontFamily: 'monospace' }}>{row.sub_ip}</td>
-                                    <td style={{ fontFamily: 'monospace' }}>{row.dest_ip}</td>
-                                    <td>{row.timestamp}</td>
-                                    <td>{row.bytes} bytes</td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      )}
                     </div>
                   )}
 
